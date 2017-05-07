@@ -12,13 +12,9 @@ public class Frame extends JFrame
 	// private JFrame frame;
 	private BombButton button[][];
 
-	Frame()
+	public Frame(int row, int col, int bombs)
 	{
-	}
-
-	Frame(int row, int col, int bombs)
-	{
-		this.setTitle("cute Joanne <3");
+		this.setTitle("Bomb");
 		this.setBounds(500, 100, row * 60, col * 60);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(new GridLayout(row, col));

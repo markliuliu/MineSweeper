@@ -15,6 +15,26 @@ public class BombButton extends JButton
 	private boolean			flag	= false;
 	private boolean			clicked	= false;
 
+	public BombButton(BombButton[][] addr, int row, int col)
+	{
+		super();
+		this.row = row;
+		this.col = col;
+		this.setVisible(true);
+		this.addMouseListener(new MyButtonListener(addr, this, row, col));
+	}
+
+	public BombButton(String s, BombButton[][] addr, int row, int col)
+	{
+
+		super(s);
+		this.row = row;
+		this.col = col;
+		this.setVisible(true);
+		this.addMouseListener(new MyButtonListener(addr, this, row, col));
+	}
+	
+	
 	public void setNumber(int n)
 	{
 		this.number = n;
@@ -31,24 +51,7 @@ public class BombButton extends JButton
 			number++;
 	}
 
-	BombButton(BombButton[][] addr, int row, int col)
-	{
-		super();
-		this.row = row;
-		this.col = col;
-		this.setVisible(true);
-		this.addMouseListener(new MyButtonListener(addr, this, row, col));
-	}
 
-	BombButton(String s, BombButton[][] addr, int row, int col)
-	{
-
-		super(s);
-		this.row = row;
-		this.col = col;
-		this.setVisible(true);
-		this.addMouseListener(new MyButtonListener(addr, this, row, col));
-	}
 
 	public void setFlag()
 	{
@@ -83,7 +86,8 @@ public class BombButton extends JButton
 																	// method to
 	// handle double click
 	{
-		System.out.println("singleclick");
+		this.getModel().setPressed(true);
+		System.out.println("single click");
 		if ((!addr[row][col].getClicked()) && (!addr[row][col].getFlag()))
 		{
 			addr[row][col].setClicked();
@@ -135,26 +139,7 @@ class MyButtonListener implements MouseListener
 	public void mouseClicked(MouseEvent e)
 	{
 		// TODO Auto-generated method stub
-		if (e.getButton() == MouseEvent.BUTTON1)
-		{
 
-			addr[row][col].singleClick(addr, row, col);
-
-		} else if (e.getButton() == MouseEvent.BUTTON3)
-		{
-			button.setFlag();
-			if (button.getFlag())
-			{
-				button.setText("XD");
-
-			} else if (button.getClicked())
-			{
-				button.setText("" + button.getNumber());
-			} else
-			{
-				button.setText("");
-			}
-		}
 	}
 
 	@Override
@@ -175,7 +160,26 @@ class MyButtonListener implements MouseListener
 	public void mousePressed(MouseEvent e)
 	{
 		// TODO Auto-generated method stub
+		if (e.getButton() == MouseEvent.BUTTON1)
+		{
 
+			addr[row][col].singleClick(addr, row, col);
+
+		} else if (e.getButton() == MouseEvent.BUTTON3)
+		{
+			button.setFlag();
+			if (button.getFlag())
+			{
+				button.setText("P");
+
+			} else if (button.getClicked())
+			{
+				button.setText("" + button.getNumber());
+			} else
+			{
+				button.setText("");
+			}
+		}
 	}
 
 	@Override
